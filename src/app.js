@@ -82,20 +82,71 @@ app.get('/save_notes/:id', async(req, res)=>{
 
 
 app.post('/save_notes/:id', async (req, res)=>{
+    try{
+        const id = req.params.id
+        console.log(id)
+        const user = await User.findOne({_id: id})
+        const note = req.body.new_note
+        console.log(note)
+        user.notes = user.notes.concat(note)
+        await user.save()
+        return res.redirect('/save_notes/'+id)
+    
+    }
+    catch(e){
+        console.log(e)
+        res.send('Site under maintenance')
+    }
 
-    const id = req.params.id
-    console.log(id)
-    const user = await User.findOne({_id: id})
-    // console.log(user)
-    const note = req.body.new_note
-    console.log(note)
-    user.notes = user.notes.concat(note)
-    await user.save()
-    // console.log(user)
-    return res.redirect('/save_notes/'+id)
 })
 
+app.post('/delete_notes/:id', async(req, res)=>{
+    const id = req.params.id
+    try{
+        const user = await User.findOne({_id:id})
+        console.log(user)
+        console.log(req.body.note_name)
+        const notes = user.notes.filter((note)=>{
+            return note!=req.body.note_name
+        })
+        user.notes = notes
+        await user.save()
+        console.log(notes)
+        return res.redirect('/save_notes/'+id)
+    
+    }
+    catch(e){
+        console.log(e)
+        res.send('Site under maintenance')
+    }
+})
 
+app.post('/edit_notes/:id', async(req, res)=>{
+    const id = req.params.id
+
+    res.render('edit_note',{
+        id : id,
+        note: req.body.note_name
+    })
+
+})
+
+app.post('/save_edited_note/:id', async (req,res)=>{
+
+    const id = req.params.id
+    const user = await User.findOne({_id: id})
+    console.log(req.body.old_note)
+    console.log(req.body.new_note)
+    var notes = user.notes.filter((note)=>{
+        return note!=req.body.old_note
+    })
+    notes = notes.concat(req.body.new_note)
+    user.notes = notes
+    await user.save()
+
+    return res.redirect('/save_notes/'+id)
+
+})
 
 app.listen(3000, ()=>{
     console.log('Server is up')

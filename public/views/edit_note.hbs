@@ -1,0 +1,18 @@
+<htm>
+    <head>
+        <title>
+            Edit note
+        </title>
+    </head>
+<body>
+        <form action="/save_edited_note/{{id}}" method="post" style="width: 600px; margin:auto">
+        <label for="new_note">Edit note</label>
+        <br>
+        <textarea name="new_note" style="width: 300px; height: 100px">{{note}}</textarea>
+        <br>
+        <input type="hidden" name="old_note" value="{{note}}">
+        <input type="submit">
+    </form>
+
+</body>
+</htm>
