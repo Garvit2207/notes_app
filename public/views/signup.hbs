@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../css/signup.css">
+	<title>Signup</title>
+</head>
+<body>
+    <div class="bg_image">
+
+<nav>
+    <ul>
+            <li>
+                <a href="">
+                    home
+                </a>
+            </li>
+            <li>
+                <a href="/">signin</a>
+            </li>
+            <li>
+            <a href="signup" style="color: #409e38;">signup</a>
+            </li>
+        
+    </ul>
+</nav>
+
+
+        <form action="/signup" method="post">
+                <div id="msg" style="color: Green" >{{status_}}</div>
+                <div style="color: red">{{error}}</div>
+            <div class="fields">
+                <label for="name">Username</label>
+                <input type="name" id="name" name="name" required>
+            </div>
+
+            <div class="fields">
+                <label for="email">e-mail</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="fields">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="fields">
+                <input type="submit" style="background-color: #f1dc4f; font-weight:bolder; text-align: left; border-radius: 6px; width: 15vw; height: 3.5vh; cursor:pointer" >
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>

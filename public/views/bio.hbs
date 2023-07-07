@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Bio Data</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <div id="notes" style="width: 600px; margin:auto">
+        Hello {{userData.name}} how are you
+       <ol>
+        {{#each userData.notes}}
+       <li><h3>{{this}}</h3></li>
+       {{/each}}
+       </ol>
+
+    </div>
+<br>
+
+<form action="/save_notes/{{userData._id}}" method="post" style="width: 600px; margin:auto">
+
+<label name="new_note">Add note</label>
+<br>
+<textarea name="new_note" style="width: 300px; height: 100px" placeholder="Share your notes"></textarea>
+<br>
+<input type="submit">
+</form>
+
+</body>
+</html>
